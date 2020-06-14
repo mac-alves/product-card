@@ -1,134 +1,186 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef } from 'react';
-import './App.css';
+import React, { useState, useCallback } from 'react';
+import { MouseEvent } from 'react';
 
-import Blue from './assets/img/blue.png';
-import Red from './assets/img/red.png';
-import Green from './assets/img/green.png';
-import Orange from './assets/img/orange.png';
-import Black from './assets/img/black.png';
-import Logo from './assets/img/logo.png';
+import BlueImg from './assets/img/blue.png';
+import RedImg from './assets/img/red.png';
+import GreenImg from './assets/img/green.png';
+import OrangeImg from './assets/img/orange.png';
+import BlackImg from './assets/img/black.png';
+import LogoImg from './assets/img/logo.png';
 
-interface KonvaTextEventTarget extends EventTarget {
-    index: number
+import { ThemeProvider, DefaultTheme } from 'styled-components';
+import GlobalStyle from './styles/global';
+import { 
+    Container, 
+    Card, 
+    ShoeBackground, 
+    Gradients,
+    Gradient,
+    Nike,
+    Logo,
+    Share,
+    Shoe,
+    Info,
+    ShoeName,
+    Description,
+    Title,
+    Text,
+    ColorContainer,
+    Colors,
+    Color,
+    SizeContainer,
+    Sizes,
+    Size,
+    BuyPrice,
+    Buy,
+    Price
+} from './styles';
+
+import black from './styles/colors/black';
+import blue from './styles/colors/blue';
+import green from './styles/colors/green';
+import orange from './styles/colors/orange';
+import red from './styles/colors/red';
+
+interface KonvaMouseEvent extends MouseEvent<HTMLElement> {
+    target: EventTarget
 }
 
-interface KonvaMouseEvent extends React.MouseEvent<HTMLElement> {
-    target: KonvaTextEventTarget
+interface ThemeColorsProductProps {
+    black: DefaultTheme;
+    blue: DefaultTheme;
+    green: DefaultTheme;
+    orange: DefaultTheme;
+    red: DefaultTheme;
 }
+
+const ThemeColorsProduct: ThemeColorsProductProps = { black, blue, green, orange, red }
+
+const SizesProducts = [7, 8, 9, 10, 11];
+
+interface ProductsProps {
+    key: keyof ThemeColorsProductProps;
+    color: string;
+    img: string;
+    gradient: Array<string>;
+}
+
+const Products: Array<ProductsProps> = [
+    { key: "blue", color: blue.color, img: BlueImg, gradient: blue.img.colorGradient}, 
+    { key: "red", color: red.color, img: RedImg, gradient: red.img.colorGradient}, 
+    { key: "green", color: green.color, img: GreenImg, gradient: green.img.colorGradient}, 
+    { key: "orange", color: orange.color, img: OrangeImg, gradient: orange.img.colorGradient},
+    { key: "black", color: black.color, img: BlackImg, gradient: black.img.colorGradient}, 
+];
 
 const App: React.FC = () => {
-    const sizes = useRef<HTMLDivElement>(null);
-    const colors = useRef<HTMLDivElement>(null);
-    const shoes = useRef<HTMLDivElement>(null);
-    const gradients = useRef<HTMLDivElement>(null);
-    const shoeBg = useRef<HTMLDivElement>(null);
+    const [ theme, setTheme ] = useState<DefaultTheme>(blue);
+    const [ sizeSelected, setSizeSelected ] = useState(7);
+    const [ colorSelected, setColorSelected ] = useState("blue");
+    const [ prevColorSelected, setPrevColorSelected ] = useState("blue");
+    const [ animationEnd, setAnimationEnd ] = useState(true);
 
-    let prevColor: any = 'blue';
-    let animationEnd: boolean = true;
-
-    function changeSize(event: KonvaMouseEvent) {
-        sizes.current?.querySelectorAll('.size')
-                      .forEach(size => size.classList.remove('active'));
-        event.currentTarget.classList.add('active');
-    }
-
-    function changeColor(event: KonvaMouseEvent){
+    function handleColor(key: keyof ThemeColorsProductProps){
         if (!animationEnd) return;
-
-        let primary = event.currentTarget.dataset.primary;
-        let color = event.currentTarget.getAttribute('color');  
-        let shoe = shoes.current?.querySelector(`.shoe[color="${color}"]`);
-        let gradient = gradients.current?.querySelector(`.gradient[color="${color}"]`);
-        let prevGradient = gradients.current?.querySelector(`.gradient[color="${prevColor}"]`);
-
-        colors.current?.querySelectorAll('.color')
-             .forEach(color => color.classList.remove('active'));
         
-        event.currentTarget.classList.add('active');
-        
-        document.documentElement.style.setProperty('--primary', (primary) ? primary : '#2175f5');
-        
-        shoes.current?.querySelectorAll('.shoe')
-             .forEach(shoe => shoe.classList.remove('show'));
-        shoe?.classList.add('show');
-
-        gradients.current?.querySelectorAll('.gradient')
-             .forEach(gradient => gradient.classList.remove('first', 'secod'));
-        gradient?.classList.add('first');
-        prevGradient?.classList.add('secod');
-        
-        prevColor = color;
-        animationEnd = false;
-        gradient?.addEventListener('animationend', () => {
-            animationEnd = true;
-        });
+        setTheme(ThemeColorsProduct[key]);
+        setPrevColorSelected(colorSelected);
+        setColorSelected(key);
+        setAnimationEnd(false);
     }
+
+    const selectClassGradient = useCallback((key: keyof ThemeColorsProductProps) => {
+        let className = "";
+        
+        if (colorSelected === key && prevColorSelected === key) {
+            className = "first secod";
+        } else if (colorSelected === key && prevColorSelected !== key){
+            className = "first";
+        } else if (colorSelected !== key && prevColorSelected === key) {
+            className = "secod";
+        }
+
+        return className;
+    }, [colorSelected, prevColorSelected]);
 
     return (
-        <div className="container">
-            <div className="card">
-                <div className="shoeBackground" ref={shoeBg}>
-                    <div className="gradients" ref={gradients}>
-                        <div className="gradient first" color="blue"></div>
-                        <div className="gradient" color="red"></div>
-                        <div className="gradient" color="green"></div>
-                        <div className="gradient" color="orange"></div>
-                        <div className="gradient" color="black"></div>
-                    </div>
-                    <h1 className="nike">nike</h1>
-                    <img src={Logo} alt="" className="logo"/>
-                    <a href="#" className="share"><i className="fas fa-share-alt"></i></a>
-                    <div ref={shoes}>
-                        <img src={Blue} alt="" className="shoe show" color="blue"/>
-                        <img src={Red} alt="" className="shoe" color="red"/>
-                        <img src={Green} alt="" className="shoe" color="green"/>
-                        <img src={Orange} alt="" className="shoe" color="orange"/>
-                        <img src={Black} alt="" className="shoe" color="black"/>
-                    </div>
-                </div>
-                <div className="info">
-                    <div className="shoeName">
+        <ThemeProvider theme={theme}>
+            <Container>
+                <GlobalStyle />
+                <Card>
+                    <ShoeBackground>
+                        <Gradients>
+                            { Products.map((product, key) => (
+                                <Gradient
+                                    key={key}
+                                    className={selectClassGradient(product.key)}
+                                    gradient={product.gradient}
+                                    onAnimationEnd={() => setAnimationEnd(true)}
+                                ></Gradient>
+                            )) }
+                        </Gradients>
+                        <Nike>nike</Nike>
+                        <Logo src={LogoImg} alt=""/>
+                        <Share href="#"><i className="fas fa-share-alt"></i></Share>
                         <div>
-                            <h1 className="big">Nike Zoom KD 12</h1>
-                            <span className="new">new</span>
+                            { Products.map((product, key) => (
+                                <Shoe 
+                                    key={key}
+                                    src={product.img} 
+                                    alt=""
+                                    className={(colorSelected === product.key) ? "active" : ""}/>
+                            )) }
                         </div>
-                        <h3 className="small">Men's running shoes</h3>
-                    </div>
-                    <div className="description">
-                        <h3 className="title">Product Info</h3>
-                        <p className="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
-                    </div>
-                    <div className="color-container">
-                        <h3 className="title">Color</h3>
-                        <div className="colors" ref={colors}>
-                            <span onClick={changeColor} className="color active" data-primary="#2175f5" color="blue"></span>
-                            <span onClick={changeColor} className="color" data-primary="#f84848" color="red"></span>
-                            <span onClick={changeColor} className="color" data-primary="#29b864" color="green"></span>
-                            <span onClick={changeColor} className="color" data-primary="#ff5521" color="orange"></span>
-                            <span onClick={changeColor} className="color" data-primary="#444" color="black"></span>
-                        </div>
-                    </div>
-                    <div className="size-container">
-                        <h3 className="title">size</h3>
-                        <div className="sizes" ref={sizes}>
-                            <span onClick={changeSize} className="size active">7</span>
-                            <span onClick={changeSize} className="size">8</span>
-                            <span onClick={changeSize} className="size">9</span>
-                            <span onClick={changeSize} className="size">10</span>
-                            <span onClick={changeSize} className="size">11</span>
-                        </div>
-                    </div>
-                    <div className="buy-price">
-                        <a href="#" className="buy"><i className="fas fa-shopping-cart"></i>Add to card</a>
-                        <div className="price">
-                            <i className="fas fa-dollar-sign"></i>
-                            <h1>189.99</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </ShoeBackground>
+                    <Info>
+                        <ShoeName>
+                            <div>
+                                <h1 className="big">Nike Zoom KD 12</h1>
+                                <span className="new">new</span>
+                            </div>
+                            <h3 className="small">Men's running shoes</h3>
+                        </ShoeName>
+                        <Description>
+                            <Title>Product Info</Title>
+                            <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</Text>
+                        </Description>
+                        <ColorContainer>
+                            <Title>Color</Title>
+                            <Colors>
+                                { Products.map((product, key) => (
+                                    <Color 
+                                        key={key}
+                                        onClick={() => handleColor(product.key)}
+                                        className={(colorSelected === product.key) ? "active" : ""}
+                                        color={product.color}
+                                    ></Color>
+                                )) }
+                            </Colors>
+                        </ColorContainer>
+                        <SizeContainer>
+                            <Title>size</Title>
+                            <Sizes>
+                                { SizesProducts.map((size, key) => (
+                                    <Size 
+                                        key={key} 
+                                        onClick={() => setSizeSelected(size)} 
+                                        className={(sizeSelected === size) ? "active" : ""}
+                                    >{size}</Size>
+                                )) }
+                            </Sizes>
+                        </SizeContainer>
+                        <BuyPrice>
+                            <Buy href="#"><i className="fas fa-shopping-cart"></i>Add to card</Buy>
+                            <Price>
+                                <i className="fas fa-dollar-sign"></i>
+                                <h1>189.99</h1>
+                            </Price>
+                        </BuyPrice>
+                    </Info>
+                </Card>
+            </Container>
+        </ThemeProvider>
     );
 }
 
