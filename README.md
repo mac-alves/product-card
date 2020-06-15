@@ -64,7 +64,7 @@ This project is under the MIT license. See the [LICENSE](https://github.com/mac-
 
 ## Autor
 
-:anchor: **Mauricio Alves** - *Github* - [mac-alves](https://github.com/mac-alves)
+:anchor: &nbsp;&nbsp; **Mauricio Alves** - *Github* - [mac-alves](https://github.com/mac-alves)
 
 
 [nodejs]: https://nodejs.org/
