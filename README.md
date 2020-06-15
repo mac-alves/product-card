@@ -26,10 +26,10 @@
   <a href="#memo-license">License</a>
 </p>
 
-## :bulb: Description
+## :bulb: &nbsp;&nbsp;&nbsp; Description
 The following project was based on [Product-Card-Using-HTML-CSS](https://github.com/sefyudem/Product-Card-Using-HTML-CSS) modifying only the fact that I implemented it using ReactJS with TypeScript.
 
-## :rocket: Technologies
+## :rocket: &nbsp;&nbsp;&nbsp; Technologies
 
 This project was developed with the following technologies:
 -  [ReactJs](https://reactjs.org/)
@@ -37,11 +37,11 @@ This project was developed with the following technologies:
 -  [styled-components](https://www.styled-components.com/)
 -  [VS Code][vc] with [EditorConfig][vceditconfig]
 
-## :bangbang: Dependencies
+## :bangbang: &nbsp;&nbsp;&nbsp; Dependencies
 - [Git](https://git-scm.com),
 - [Node.js v12.16.1][nodejs] + [NPM v6.13.4][npm]
 
-## :information_source: How To Use
+## :information_source: &nbsp;&nbsp;&nbsp; How To Use
 
 ```bash
 # Clone this repository
@@ -57,8 +57,8 @@ $ npm install
 $ npm start
 ```
 
-## :memo: License
-<!-- This project is under the MIT license. See the [LICENSE](https://github.com/mac-alves/form/blob/master/LICENSE) for more information. -->
+## :memo: &nbsp;&nbsp;&nbsp; License
+This project is under the MIT license. See the [LICENSE](https://github.com/mac-alves/product-card/blob/master/LICENSE) for more information.
 
 ---
 
