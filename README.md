@@ -1,44 +1,74 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">
+  <img alt="Design+Code" src="https://res.cloudinary.com/dpf7e7tpc/image/upload/v1592180949/projetos/product-card_yvrein.gif" />
+</h1>
 
-## Available Scripts
+<h1 align="center">
+  Product Card
+</h1>
+<h3 align="center">Product Card - simple application of a product card using ReactJS and TypeScript</h3>
+<br/>
+<p align="center">
 
-In the project directory, you can run:
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/mac-alves/product-card">
 
-### `npm start`
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/mac-alves/product-card">
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/mac-alves/product-card">
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/mac-alves/product-card"> 
 
-### `npm test`
+</p>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p align="center">
+  <a href="#bulb-description">Description</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#memo-license">License</a>
+</p>
 
-### `npm run build`
+## :bulb: Description
+The following project was based on [Product-Card-Using-HTML-CSS](https://github.com/sefyudem/Product-Card-Using-HTML-CSS) modifying only the fact that I implemented it using ReactJS with TypeScript.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## :rocket: Technologies
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+This project was developed with the following technologies:
+-  [ReactJs](https://reactjs.org/)
+-  [TypeScript](https://www.typescriptlang.org/)
+-  [styled-components](https://www.styled-components.com/)
+-  [VS Code][vc] with [EditorConfig][vceditconfig]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## :bangbang: Dependencies
+- [Git](https://git-scm.com),
+- [Node.js v12.16.1][nodejs] + [NPM v6.13.4][npm]
 
-### `npm run eject`
+## :information_source: How To Use
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```bash
+# Clone this repository
+$ git clone https://github.com/mac-alves/product-card
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Go into the repository
+$ cd product-card/
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Install dependencies
+$ npm install
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# run project
+$ npm start
+```
 
-## Learn More
+## :memo: License
+<!-- This project is under the MIT license. See the [LICENSE](https://github.com/mac-alves/form/blob/master/LICENSE) for more information. -->
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Autor
+
+:anchor: **Mauricio Alves** - *Github* - [mac-alves](https://github.com/mac-alves)
+
+
+[nodejs]: https://nodejs.org/
+[npm]: https://www.npmjs.com/
+[vc]: https://code.visualstudio.com/
+[vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
+[vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
